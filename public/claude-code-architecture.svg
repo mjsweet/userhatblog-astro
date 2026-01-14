@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" style="font-family: 'JetBrains Mono', monospace;">
+  <defs>
+    <style>
+      .box { fill: white; stroke: black; stroke-width: 5; }
+      .label { fill: black; font-size: 16px; font-weight: 700; text-anchor: middle; }
+      .sublabel { fill: #1a1a1a; font-size: 12px; text-anchor: middle; }
+      .arrow { stroke: black; stroke-width: 3; fill: none; marker-end: url(#arrowhead); }
+      .arrow-label { fill: black; font-size: 11px; text-anchor: middle; }
+      .accent { fill: #ff0000; stroke: black; stroke-width: 3; }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="black" />
+    </marker>
+  </defs>
+
+  <!-- iPhone Box -->
+  <rect class="box" x="50" y="50" width="160" height="100" transform="rotate(-2 130 100)" />
+  <text class="label" x="130" y="90">iPhone</text>
+  <text class="sublabel" x="130" y="110">(Termius)</text>
+
+  <!-- Tailscale Network Box -->
+  <rect class="accent" x="290" y="50" width="220" height="100" />
+  <text class="label" x="400" y="90" fill="white">Tailscale</text>
+  <text class="sublabel" x="400" y="110" fill="white">Network</text>
+
+  <!-- Mac Box -->
+  <rect class="box" x="590" y="50" width="160" height="100" transform="rotate(2 670 100)" />
+  <text class="label" x="670" y="90">Mac</text>
+  <text class="sublabel" x="670" y="110">(Claude Code)</text>
+
+  <!-- Pushcut Box -->
+  <rect class="box" x="320" y="250" width="160" height="100" />
+  <text class="label" x="400" y="290">Pushcut</text>
+  <text class="sublabel" x="400" y="310">(webhook)</text>
+
+  <!-- iPhone to Tailscale arrow -->
+  <line class="arrow" x1="210" y1="100" x2="285" y2="100" />
+  <text class="arrow-label" x="247" y="90">VPN</text>
+
+  <!-- Tailscale to Mac arrow -->
+  <line class="arrow" x1="515" y1="100" x2="585" y2="100" />
+
+  <!-- Mac to Pushcut arrow -->
+  <path class="arrow" d="M 670 155 L 670 190 L 450 190 L 450 245" />
+  <text class="arrow-label" x="560" y="205">HTTP POST</text>
+
+  <!-- Pushcut to iPhone arrow -->
+  <path class="arrow" d="M 320 290 L 180 290 L 180 155" />
+  <text class="arrow-label" x="240" y="305">Push notify</text>
+
+  <!-- Decorative brutalist elements -->
+  <rect fill="#ffff00" stroke="black" stroke-width="3" x="10" y="10" width="40" height="8" transform="rotate(5 30 14)" />
+  <rect fill="#ffff00" stroke="black" stroke-width="3" x="750" y="10" width="40" height="8" transform="rotate(-5 770 14)" />
+</svg>

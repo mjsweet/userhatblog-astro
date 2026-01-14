@@ -32,17 +32,7 @@ I've adapted both for running on your own Mac rather than a cloud VM, and added 
 
 ## The Architecture
 
-```
-┌─────────────┐      ┌───────────────┐      ┌─────────────┐
-│   iPhone    │──────│   Tailscale   │──────│    Mac      │
-│  (Termius)  │ VPN  │    Network    │      │(Claude Code)│
-└─────────────┘      └───────────────┘      └─────────────┘
-       ▲                                           │
-       │              ┌───────────────┐            │
-       └─────────────│    Pushcut    │◄───────────┘
-         Push notify  │   (webhook)   │  HTTP POST
-                      └───────────────┘
-```
+![Claude Code Architecture Diagram](/claude-code-architecture.svg)
 
 The flow is simple: SSH into your Mac through Tailscale's private network, attach to a tmux session running Claude Code, and get push notifications when Claude needs input or finishes a task.
 
