@@ -49,6 +49,8 @@ Your Mac needs to stay awake. Go to **System Settings → Energy** and disable s
 caffeinate -d -i -s
 ```
 
+**Alternatively**, use [Caffeinated](https://caffeinated.app) — a menu bar app that makes it easy to prevent sleep with a single click. Much more convenient than running terminal commands.
+
 ### 1.2 Enable Remote Login (SSH)
 
 Go to **System Settings → General → Sharing** and enable **Remote Login**.
