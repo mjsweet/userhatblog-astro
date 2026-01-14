@@ -11,18 +11,18 @@ const siteTitle = 'User Hat';
   <header class="site-header">
     {isHome ? (
       <div class="header-home">
-        <div class="logo-container">
+        <a href="/" class="logo-container">
           <div class="logo-placeholder">UH</div>
-        </div>
+        </a>
         <h1 class="site-title-large">
           <a href="/">{siteTitle}</a>
         </h1>
       </div>
     ) : (
       <div class="header-inner">
-        <div class="logo-container-small">
+        <a href="/" class="logo-container-small">
           <div class="logo-placeholder-small">UH</div>
-        </div>
+        </a>
         <h3 class="site-title-small">
           <a href="/">{siteTitle}</a>
         </h3>
@@ -73,12 +73,20 @@ const siteTitle = 'User Hat';
     display: flex;
     align-items: center;
     justify-content: center;
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+
+  .logo-container:hover {
+    background-color: var(--colour-accent-primary);
+    transform: rotate(-3deg) scale(1.05);
   }
 
   .logo-placeholder {
     font-family: 'Space Grotesk', sans-serif;
     font-weight: 700;
     font-size: var(--text-lg);
+    color: var(--colour-black);
   }
 
   .site-title-large {
@@ -118,12 +126,20 @@ const siteTitle = 'User Hat';
     display: flex;
     align-items: center;
     justify-content: center;
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+
+  .logo-container-small:hover {
+    background-color: var(--colour-accent-highlight);
+    transform: scale(1.1);
   }
 
   .logo-placeholder-small {
     font-family: 'Space Grotesk', sans-serif;
     font-weight: 700;
     font-size: var(--text-xs);
+    color: var(--colour-black);
   }
 
   .site-title-small {
