@@ -1,0 +1,91 @@
+---
+import { getCollection } from 'astro:content';
+
+// Get published posts sorted by date
+const allPosts = await getCollection('blog', ({ data }) => {
+  return data.published !== false;
+});
+
+const posts = allPosts.sort((a, b) =>
+  b.data.date.valueOf() - a.data.date.valueOf()
+);
+
+const formatDate = (date: Date) => {
+  return new Intl.DateTimeFormat('en-AU', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  }).format(date);
+};
+---
+
+<div class="post-list">
+  {posts.map(post => (
+    <article class="post-item">
+      <div class="post-date-badge">
+        {formatDate(post.data.date)}
+      </div>
+      <h2 class="post-title">
+        <a href={`/${post.slug}/`}>
+          {post.data.title}
+        </a>
+      </h2>
+      <p class="post-description">{post.data.description}</p>
+    </article>
+  ))}
+</div>
+
+<style>
+  .post-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-8);
+  }
+
+  .post-item {
+    position: relative;
+    padding: var(--space-6);
+    border: var(--border-thick) solid var(--colour-black);
+    background-color: var(--colour-white);
+    transition: transform 0.2s ease;
+  }
+
+  .post-item:hover {
+    transform: translateX(8px);
+    box-shadow: -8px 8px 0 var(--colour-accent-primary);
+  }
+
+  .post-date-badge {
+    position: absolute;
+    top: calc(-1 * var(--space-3));
+    right: var(--space-4);
+    background-color: var(--colour-accent-primary);
+    color: var(--colour-white);
+    padding: var(--space-1) var(--space-3);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: var(--text-sm);
+    font-weight: 700;
+    border: var(--border-medium) solid var(--colour-black);
+    transform: rotate(2deg);
+  }
+
+  .post-title {
+    font-size: var(--text-2xl);
+    margin-bottom: var(--space-3);
+  }
+
+  .post-title a {
+    border: none;
+    color: var(--colour-black);
+  }
+
+  .post-title a:hover {
+    background-color: var(--colour-accent-highlight);
+  }
+
+  .post-description {
+    font-size: var(--text-base);
+    line-height: var(--leading-loose);
+    color: var(--colour-grey-dark);
+  }
+</style>

@@ -1,0 +1,89 @@
+---
+// Placeholder for profile image
+---
+
+<aside class="bio">
+  <div class="bio-image-wrapper">
+    <div class="bio-image-placeholder">MS</div>
+  </div>
+  <div class="bio-content">
+    <p>
+      <strong>Matthew Sweet</strong> lives and works in Brisbane as a freelance SEO specialist.
+    </p>
+    <p>
+      <a href="https://twitter.com/msweet" class="bio-link">
+        Follow on Twitter →
+      </a>
+    </p>
+  </div>
+</aside>
+
+<style>
+  .bio {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: var(--space-3);
+    margin-top: var(--space-8);
+    padding: var(--space-4);
+    border: var(--border-thick) solid var(--colour-black);
+    background-color: var(--colour-grey-light);
+    position: relative;
+  }
+
+  .bio::before {
+    content: 'ABOUT';
+    position: absolute;
+    top: calc(-1 * var(--space-3));
+    left: var(--space-3);
+    background-color: var(--colour-black);
+    color: var(--colour-white);
+    padding: var(--space-1) var(--space-2);
+    font-weight: 700;
+    font-size: var(--text-sm);
+    letter-spacing: var(--tracking-wide);
+  }
+
+  .bio-image-wrapper {
+    width: 5rem;
+    height: 5rem;
+    border: var(--border-medium) solid var(--colour-black);
+    overflow: hidden;
+    background-color: var(--colour-white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .bio-image-placeholder {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: var(--text-xl);
+    color: var(--colour-grey-mid);
+  }
+
+  .bio-content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .bio-content p {
+    margin: 0;
+  }
+
+  .bio-link {
+    display: inline-block;
+    background-color: var(--colour-black);
+    color: var(--colour-white);
+    padding: var(--space-1) var(--space-2);
+    border: none;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: var(--text-sm);
+  }
+
+  .bio-link:hover {
+    background-color: var(--colour-accent-primary);
+    transform: translateX(4px);
+  }
+</style>

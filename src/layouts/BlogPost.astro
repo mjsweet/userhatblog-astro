@@ -1,0 +1,131 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Layout from '../components/Layout.astro';
+import Bio from '../components/Bio.astro';
+import PostNav from '../components/PostNav.astro';
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  post: CollectionEntry<'blog'>;
+  prev?: CollectionEntry<'blog'> | null;
+  next?: CollectionEntry<'blog'> | null;
+}
+
+const { post, prev, next } = Astro.props;
+const { Content } = await post.render();
+
+const formatDate = (date: Date) => {
+  return new Intl.DateTimeFormat('en-AU', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  }).format(date);
+};
+---
+
+<BaseLayout
+  title={post.data.title}
+  description={post.data.description}
+>
+  <Layout>
+    <article class="blog-post">
+      <header class="post-header">
+        <h1 class="post-title">{post.data.title}</h1>
+        <time class="post-date" datetime={post.data.date.toISOString()}>
+          {formatDate(post.data.date)}
+        </time>
+      </header>
+
+      <div class="post-content">
+        <Content />
+      </div>
+
+      <hr class="post-divider" />
+
+      <Bio />
+
+      <PostNav prev={prev} next={next} />
+    </article>
+  </Layout>
+</BaseLayout>
+
+<style>
+  .blog-post {
+    /* Post styling */
+  }
+
+  .post-header {
+    margin-bottom: var(--space-8);
+    padding-bottom: var(--space-6);
+    border-bottom: var(--border-chunky) solid var(--colour-black);
+  }
+
+  .post-title {
+    font-size: var(--text-3xl);
+    margin-bottom: var(--space-3);
+    line-height: var(--leading-tight);
+  }
+
+  .post-date {
+    display: inline-block;
+    background-color: var(--colour-black);
+    color: var(--colour-white);
+    padding: var(--space-1) var(--space-3);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: var(--text-sm);
+    font-weight: 700;
+    border: var(--border-thin) solid var(--colour-black);
+  }
+
+  .post-content {
+    font-size: var(--text-lg);
+    line-height: var(--leading-loose);
+  }
+
+  /* Brutalist typography for content */
+  .post-content :global(h2) {
+    margin-top: var(--space-8);
+    margin-bottom: var(--space-4);
+    padding-left: var(--space-3);
+    border-left: var(--border-chunky) solid var(--colour-accent-primary);
+  }
+
+  .post-content :global(h3) {
+    margin-top: var(--space-6);
+    margin-bottom: var(--space-3);
+  }
+
+  .post-content :global(h4) {
+    margin-top: var(--space-6);
+    margin-bottom: var(--space-3);
+  }
+
+  .post-content :global(p) {
+    margin-bottom: var(--space-4);
+  }
+
+  .post-content :global(ul),
+  .post-content :global(ol) {
+    margin-bottom: var(--space-4);
+    padding-left: var(--space-6);
+  }
+
+  .post-content :global(li) {
+    margin-bottom: var(--space-2);
+  }
+
+  .post-content :global(blockquote) {
+    border-left: var(--border-chunky) solid var(--colour-black);
+    padding-left: var(--space-4);
+    margin: var(--space-6) 0;
+    font-style: italic;
+    background-color: var(--colour-grey-light);
+    padding: var(--space-4);
+  }
+
+  .post-divider {
+    margin: var(--space-8) 0;
+    border: none;
+    border-top: var(--border-thick) solid var(--colour-black);
+  }
+</style>

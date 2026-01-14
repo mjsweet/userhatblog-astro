@@ -1,0 +1,87 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  prev?: CollectionEntry<'blog'> | null;
+  next?: CollectionEntry<'blog'> | null;
+}
+
+const { prev, next } = Astro.props;
+---
+
+{(prev || next) && (
+  <nav class="post-nav">
+    <div class="post-nav-item">
+      {prev && (
+        <a href={`/${prev.slug}/`} class="post-nav-link prev">
+          <span class="post-nav-label">← Previous</span>
+          <span class="post-nav-title">{prev.data.title}</span>
+        </a>
+      )}
+    </div>
+    <div class="post-nav-item">
+      {next && (
+        <a href={`/${next.slug}/`} class="post-nav-link next">
+          <span class="post-nav-label">Next →</span>
+          <span class="post-nav-title">{next.data.title}</span>
+        </a>
+      )}
+    </div>
+  </nav>
+)}
+
+<style>
+  .post-nav {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-4);
+    margin-top: var(--space-8);
+    padding-top: var(--space-4);
+    border-top: var(--border-thick) solid var(--colour-black);
+  }
+
+  .post-nav-item {
+    min-height: 6rem;
+  }
+
+  .post-nav-link {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    padding: var(--space-3);
+    border: var(--border-medium) solid var(--colour-black);
+    background-color: var(--colour-white);
+    text-decoration: none;
+    transition: all 0.2s ease;
+    height: 100%;
+  }
+
+  .post-nav-link:hover {
+    background-color: var(--colour-black);
+    transform: scale(1.02);
+  }
+
+  .post-nav-link:hover .post-nav-label,
+  .post-nav-link:hover .post-nav-title {
+    color: var(--colour-white);
+  }
+
+  .post-nav-link.next {
+    text-align: right;
+  }
+
+  .post-nav-label {
+    font-size: var(--text-sm);
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--colour-grey-mid);
+    letter-spacing: var(--tracking-wide);
+  }
+
+  .post-nav-title {
+    font-size: var(--text-base);
+    font-weight: 600;
+    color: var(--colour-black);
+    border: none;
+  }
+</style>
