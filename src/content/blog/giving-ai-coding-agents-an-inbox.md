@@ -27,7 +27,7 @@ The token URL is the bridge. It serves as the session identifier, the access con
 
 My brother-in-law Joshua Easton, a product manager, called it a "feedback machine". That is exactly right. The agent sends out structured questions, gets back structured answers, and keeps working. A machine for turning external human input into data the agent can act on.
 
-![The Feedback Machine — Agent creates a form via the Intake API, the API generates a token URL, the person opens and submits it, and the agent retrieves the structured response.](/feedback-machine.svg)
+![The Feedback Machine — Agent creates a form via the Intake API, the API generates a token URL, the person opens and submits it, and the agent retrieves the structured response.](/feedback-machine-illustrated.png)
 
 ## A concrete example
 
