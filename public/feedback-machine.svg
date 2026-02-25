@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" style="font-family: 'JetBrains Mono', monospace;">
+  <defs>
+    <style>
+      .box { fill: white; stroke: black; stroke-width: 5; }
+      .label { fill: black; font-size: 16px; font-weight: 700; text-anchor: middle; }
+      .sublabel { fill: #1a1a1a; font-size: 12px; text-anchor: middle; }
+      .arrow { stroke: black; stroke-width: 3; fill: none; marker-end: url(#arrowhead); }
+      .arrow-label { fill: black; font-size: 11px; text-anchor: middle; }
+      .accent { fill: #ff0000; stroke: black; stroke-width: 3; }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="black" />
+    </marker>
+  </defs>
+
+  <!-- Agent Box -->
+  <rect class="box" x="50" y="130" width="160" height="100" transform="rotate(-2 130 180)" />
+  <text class="label" x="130" y="170">Agent</text>
+  <text class="sublabel" x="130" y="190">(Claude Code)</text>
+
+  <!-- API Box (red accent) -->
+  <rect class="accent" x="300" y="40" width="200" height="80" />
+  <text class="label" x="400" y="72" fill="white">Intake API</text>
+  <text class="sublabel" x="400" y="92" fill="white">POST + GET</text>
+
+  <!-- Form Box -->
+  <rect class="accent" x="300" y="260" width="200" height="80" />
+  <text class="label" x="400" y="292" fill="white">Token URL</text>
+  <text class="sublabel" x="400" y="312" fill="white">pre-filled form</text>
+
+  <!-- Person Box -->
+  <rect class="box" x="590" y="130" width="160" height="100" transform="rotate(2 670 180)" />
+  <text class="label" x="670" y="170">Person</text>
+  <text class="sublabel" x="670" y="190">(browser)</text>
+
+  <!-- Agent to API arrow (top) -->
+  <path class="arrow" d="M 190 155 L 240 155 L 240 80 L 295 80" />
+  <text class="arrow-label" x="218" y="70">create</text>
+
+  <!-- API to Form arrow (down) -->
+  <line class="arrow" x1="400" y1="125" x2="400" y2="255" />
+  <text class="arrow-label" x="435" y="195">token</text>
+
+  <!-- Form to Person arrow -->
+  <path class="arrow" d="M 505 300 L 560 300 L 560 210 L 585 210" />
+  <text class="arrow-label" x="560" y="265">opens</text>
+
+  <!-- Person to API arrow (top) -->
+  <path class="arrow" d="M 670 125 L 670 80 L 505 80" />
+  <text class="arrow-label" x="590" y="70">submits</text>
+
+  <!-- API to Agent arrow (return) -->
+  <path class="arrow" d="M 295 60 L 240 60 L 240 175 L 215 175" />
+  <text class="arrow-label" x="218" y="215">retrieve</text>
+
+  <!-- Decorative brutalist elements -->
+  <rect fill="#ffff00" stroke="black" stroke-width="3" x="10" y="10" width="40" height="8" transform="rotate(5 30 14)" />
+  <rect fill="#ffff00" stroke="black" stroke-width="3" x="750" y="10" width="40" height="8" transform="rotate(-5 770 14)" />
+  <rect fill="#ffff00" stroke="black" stroke-width="3" x="10" y="380" width="40" height="8" transform="rotate(-3 30 384)" />
+</svg>
