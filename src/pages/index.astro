@@ -5,6 +5,20 @@ import PostList from '../components/PostList.astro';
 import Bio from '../components/Bio.astro';
 
 const siteDescription = 'A blog exploring my interest in Usability and Search Engine Visibility.';
+
+const blogSchema = {
+  "@context": "https://schema.org",
+  "@type": "Blog",
+  "name": "User Hat",
+  "description": siteDescription,
+  "url": "https://www.userhat.com/",
+  "inLanguage": "en-AU",
+  "author": {
+    "@type": "Person",
+    "name": "Matthew Sweet",
+    "url": "https://www.userhat.com/"
+  }
+};
 ---
 
 <BaseLayout
@@ -16,4 +30,6 @@ const siteDescription = 'A blog exploring my interest in Usability and Search En
     <PostList />
     <Bio />
   </Layout>
+
+  <script type="application/ld+json" set:html={JSON.stringify(blogSchema)} />
 </BaseLayout>
