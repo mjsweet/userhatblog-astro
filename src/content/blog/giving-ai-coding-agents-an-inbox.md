@@ -119,6 +119,26 @@ Pre-filled data can be wrong. If the respondent does not verify carefully, incor
 
 The form is generic. A multi-step intake form works for structured business data. It would be less suitable for open-ended creative briefs, complex technical specifications, or anything requiring rich media input. Different use cases might need different form types.
 
+## How this differs from existing tools
+
+Most human-in-the-loop patterns assume the human is the agent operator. The person who approves, corrects, or provides input is the same person who started the agent session — or at least someone on the same team with access to the same tools.
+
+[LangChain's Agent Inbox](https://github.com/langchain-ai/agent-inbox) is a developer dashboard for managing LangGraph interrupts. When an agent pauses, the operator reviews state and resumes the run. It is powerful, but the audience is the person running the agent.
+
+[HumanLayer](https://github.com/humanlayer/humanlayer) routes approve/reject requests to Slack, email, or Discord. The humans in the loop are internal team members who receive notifications and make binary decisions. The agent asks "should I proceed?" and a colleague says yes or no.
+
+The [OpenAI Agents SDK](https://openai.github.io/openai-agents-js/guides/human-in-the-loop/) prompts the operator to approve tool calls in the terminal. The human-in-the-loop is literally the person at the keyboard.
+
+[Cloudflare's Agents SDK paired with Knock](https://blog.cloudflare.com/building-agents-at-knock-agents-sdk/) sends push notifications to team members for approval decisions. Again, the respondent is someone with access to internal notification channels.
+
+All of these solve a real problem. Agents should not take consequential actions without oversight. But they all point inward — toward the operator or the team.
+
+The outbox/inbox pattern points outward. The agent sends structured questions to someone who has no access to the agent's session, no developer tools, and potentially no idea an agent is involved. A client. A stakeholder. A domain expert. They see a web form at a URL, not a Slack notification or a terminal prompt.
+
+The second difference is pre-filling. The agent does research before asking questions, and populates the form with what it already knows. The respondent verifies and corrects rather than starting from blank. None of the tools above include this pattern.
+
+The [source code for the Intake API](https://github.com/mjsweet/intake-api) is available on GitHub.
+
 ## What comes next
 
 AI agents are getting better at doing work. The next challenge is getting better at working *with* people — asynchronously, across organisational boundaries, without requiring everyone to use the same tool.
