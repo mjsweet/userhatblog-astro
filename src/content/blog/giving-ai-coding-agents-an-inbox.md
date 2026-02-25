@@ -89,6 +89,25 @@ This matters because the agent often works on behalf of different businesses. Wh
 
 **Security.** Token URLs are cryptographically random (24 characters from a 55-character alphabet — roughly 138 bits of entropy). Expiry is enforced server-side (30 days default). Optional password protection adds a second layer: the agent sets a password when creating the record, and communicates it to the recipient via the email body. The form shows a password gate before revealing any data. You need the token URL *and* the password. The password is hashed with SHA-256 before storage. This is not suitable for high-security authentication, but it is appropriate for a form PIN where the threat model is accidental link sharing rather than targeted attack.
 
+## Keeping a local record
+
+The remote API is ephemeral by design. Records expire after 30 days. The agent or operator can delete test forms at any time. This is fine for the API — it is a message bus, not an archive. But the project needs a permanent record of what was sent and what came back.
+
+The solution is a local audit trail. After every API call, the agent appends a line to a JSONL file in the project directory:
+
+```json
+{"ts":"2026-02-25T10:37:41Z","action":"create","method":"POST","path":"/api/intake","status":"draft"}
+{"ts":"2026-02-25T10:38:02Z","action":"status_check","method":"GET","path":"/api/intake/:token","status":"sent"}
+{"ts":"2026-02-26T14:22:11Z","action":"retrieve_response","method":"GET","path":"/api/intake/:token/response","status":"submitted"}
+{"ts":"2026-02-26T14:22:15Z","action":"mark_imported","method":"PATCH","path":"/api/intake/:token/status","status":"imported"}
+```
+
+Alongside the log, the agent saves copies of the key artefacts: the form definition it sent, the response it received, and any files the respondent uploaded. These sit in the project's output directory and persist indefinitely — they are just files on disk.
+
+This means deletion on the remote API is safe. Once the agent has retrieved and saved the response locally, the remote record is redundant. The `imported` status signals that the data has been consumed. Deletion is for cleanup — removing test forms, duplicates, or honouring a data removal request — not a step in the standard workflow. The local audit trail is the permanent record.
+
+The pattern is the same one that makes event sourcing work: the log of what happened is more valuable than the current state. If the project needs to be revisited months later, the audit trail shows exactly what was sent, when the client responded, and what they said. The remote API does not need to remember. The project does.
+
 ## Beyond client intake
 
 The pattern generalises. Any workflow where an agent needs structured input from an external human can use this approach:
