@@ -21,6 +21,11 @@ export async function GET(context: APIContext) {
       pubDate: post.data.date,
       link: `/${post.slug}/`,
     })),
-    customData: '<language>en-au</language>',
+    xmlns: { atom: 'http://www.w3.org/2005/Atom' },
+    customData: [
+      '<language>en-au</language>',
+      '<atom:link href="https://pubsubhubbub.appspot.com/" rel="hub" type="application/atom+xml" />',
+      '<atom:link href="https://www.userhat.com/rss.xml" rel="self" type="application/rss+xml" />',
+    ].join('\n'),
   });
 }
