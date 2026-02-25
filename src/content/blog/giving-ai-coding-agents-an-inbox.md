@@ -71,7 +71,7 @@ Pre-filling also reduces errors. When people type from memory, they make mistake
 
 ## Implementation sketch
 
-For developers who want to build something similar, the architecture is simple.
+For developers who want to build something similar, the architecture is simple. The full source is available at [github.com/mjsweet/intake-api](https://github.com/mjsweet/intake-api).
 
 **API and form server.** A single Cloudflare Worker (Hono framework) serves both JSON API endpoints and server-rendered HTML forms. One deployment, one domain.
 
